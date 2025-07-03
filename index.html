@@ -1,0 +1,99 @@
+# Cotizador
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Cotizador MikuStore</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f7f7f7;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 30px;
+      padding: 20px;
+    }
+    .titulo-decorativo {
+      font-size: 22px;
+      font-weight: bold;
+      color: #444;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+    .logo {
+      width: 100px;
+      margin-bottom: 10px;
+    }
+    .decoracion {
+      width: 200px;
+      margin-bottom: 10px;
+    }
+    h1 {
+      color: #333;
+      margin-top: 10px;
+    }
+    input, button {
+      padding: 10px;
+      margin: 10px;
+      font-size: 16px;
+    }
+    #resultado {
+      margin-top: 20px;
+      font-weight: bold;
+      font-size: 20px;
+      white-space: pre-line;
+      text-align: center;
+    }
+    .aclaracion {
+      margin-top: 20px;
+      color: #555;
+      font-size: 14px;
+      max-width: 300px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Logo MikuStore -->
+  <img src="https://i.imgur.com/FW7d3sM.png" alt="Logo MikuStore" class="logo">
+
+  <!-- Imagen decorativa -->
+  <img src="https://i.imgur.com/Jcp3w5X.png" alt="Decoración" class="decoracion">
+
+  <h1>Cotizador 🧮</h1>
+
+  <label for="usd">Ingrese dólares:</label>
+  <input type="number" id="usd" placeholder="Ej: 20">
+  <br>
+  <button onclick="calcular()">Calcular</button>
+
+  <div id="resultado"></div>
+
+  <!-- Aclaración de precios -->
+  <div class="aclaracion">
+    El precio calculado es el PRECIO FINAL con el fee incluido.
+  </div>
+
+  <script>
+    const cotizacion = 1350;
+    const comisionUSD = 2.20;
+
+    function calcular() {
+      const usd = parseFloat(document.getElementById("usd").value);
+      if (isNaN(usd) || usd <= 0) {
+        document.getElementById("resultado").innerText = "Por favor ingrese un número válido.";
+        return;
+      }
+
+      const totalUSD = usd + comisionUSD;
+      const totalARS = totalUSD * cotizacion;
+
+      document.getElementById("resultado").innerText = 
+        `Total a pagar: $${totalARS.toLocaleString("es-AR", {minimumFractionDigits: 2})} ARS\n(Cantidad ingresada: ${usd} + comisión de ${comisionUSD} USD)`;
+    }
+  </script>
+
+</body>
+</html>
